@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .add-task-form {
+            margin-bottom: 20px;
+        }
+
+        .add-task-form input {
+            width: 70%;
+            padding: 8px;
+        }
+
+        .add-task-form button {
+            padding: 8px 16px;
+        }
+
+        .tasks-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 5px;
+        }
+
+        .task-item.completed .task-description {
+            text-decoration: line-through;
+        }
+
+        .task-checkbox {
+            margin-right: 10px;
+        }
+
+        .task-description {
+            flex: 1;
+        }
+
+        .delete-btn {
+            padding: 5px 10px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>To-Do List</h1>
+
+        <!-- Formulario para agregar tareas -->
+        <form @submit.prevent="addTask" class="add-task-form">
+            <input v-model="newTaskDescription" type="text" placeholder="Nueva tarea">
+            <button type="submit">Agregar</button>
+        </form>
+
+        <!-- Lista de tareas -->
+        <ul class="tasks-list">
+            <li v-for="task in tasks" :key="task.id" :class="['task-item', { completed: task.completed }]">
+                <input type="checkbox" :checked="task.completed" @change="toggleTask(task)" class="task-checkbox">
+                <span class="task-description">{{ task.description }}</span>
+                <button @click="deleteTask(task.id)" class="delete-btn">Eliminar</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    tasks: [],
+                    newTaskDescription: '',
+                    apiUrl: 'http://localhost:3000'
+                };
+            },
+            methods: {
+                // TODO: Cargar todas las tareas desde el backend
+                async loadTasks() {
+                    // Implementar petición GET a /tasks
+                },
+
+                // TODO: Agregar una nueva tarea
+                async addTask() {
+                    // Implementar petición POST a /tasks
+                },
+
+                // TODO: Marcar/desmarcar tarea como completada
+                async toggleTask(task) {
+                    // Implementar petición PUT a /tasks/:id
+                },
+
+                // TODO: Eliminar una tarea
+                async deleteTask(id) {
+                    // Implementar petición DELETE a /tasks/:id
+                }
+            },
+            // Cargar tareas al iniciar la aplicación
+            mounted() {
+                this.loadTasks();
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
